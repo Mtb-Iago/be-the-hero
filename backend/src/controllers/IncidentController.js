@@ -20,7 +20,7 @@ module.exports = {
                 'ongs.uf'
             ]);
 
-        response.header('X-Total-Count', count['count(*)']); //mostra quantos intes tem cadastrados
+        response.header('x-total-count', count['count(*)']); //mostra quantos intes tem cadastrados
 
 
         return response.json({ incidents });
