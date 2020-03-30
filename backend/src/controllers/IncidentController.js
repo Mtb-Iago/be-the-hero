@@ -12,18 +12,18 @@ module.exports = {
             .join('ongs', 'ongs.id', '=', 'incidents.ong_id') //compara os ids para e trazendo os dados do incidente
             .limit(5) //esquema de paginazação limita 5 itens por pagina
             .offset((page - 1) * 5)
-            .select(['incidents.*', //incidents pega todos os dados, porem de ongs busca os listados
+            .select('incidents.*', //incidents pega todos os dados, porem de ongs busca os listados
                 'ongs.name',
                 'ongs.email',
                 'ongs.whatsapp',
                 'ongs.city',
                 'ongs.uf'
-            ]);
+            );
 
         response.header('x-total-count', count['count(*)']); //mostra quantos intes tem cadastrados
 
 
-        return response.json({ incidents });
+        return response.json(incidents);
     },
     async create(request, response) {
         const { title, description, value } = request.body; //tipo os parametros do construtor

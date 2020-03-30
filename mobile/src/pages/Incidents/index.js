@@ -27,7 +27,6 @@ export default function Incidents() {
     }
 
     async function loadIncidents() {
-        console.log('entrei');
 
         if (loading) {
             return;
@@ -41,9 +40,9 @@ export default function Incidents() {
         const response = await api.get('incidents', {
             params: { page }//avisa quantas paginas esta
         });
-        console.log(response.data);
 
-        setIncidents([...incidents, response.data]) //onde vem os dados da api, os casos ...
+
+        setIncidents([...incidents, ...response.data]) //onde vem os dados da api, os casos ...
         setTotal(response.headers['x-total-count']);//total de casos cadastrados
         setPage(page + 1);
         setLoading(false);
@@ -83,16 +82,23 @@ export default function Incidents() {
                         <Text style={styles.incidentsValue}>{incident.title}</Text>
 
                         <Text style={styles.incidentsProperty}>VALOR:</Text>
-                        <Text style={styles.incidentsValue}>{(incident.value)}
+                        <Text style={styles.incidentsValue}>{
+                            Intl.NumberFormat(
+                                'pt-BR',
+                                {
+                                    style: 'currency',
+                                    currency: 'BRL'
+                                })
+                                .format(incident.value)
+                        }
                         </Text>
 
                         <TouchableOpacity //efeito no buttao
                             style={styles.detailsButton}
                             onPress={() => navigateToDetail(incident)}//com erow function para nao inciar de vez
                         >
-                            <Feather name="arrow-left" size={28} color="#e02041" />
                             <Text style={styles.detailsButtonText}>Ver mais detalhes</Text>
-
+                            <Feather name="arrow-left" size={28} color="#e02041" />
                             <Feather />
 
 
