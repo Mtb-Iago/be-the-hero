@@ -60,6 +60,9 @@ export default function Detail() {
                 <Text style={styles.incidentsProperty}>CASO:</Text>
                 <Text style={styles.incidentsValue}>{incident.title}</Text>
 
+                <Text style={styles.incidentsProperty}>DESCRIÇÃO DO CASO:</Text>
+                <Text style={styles.incidentsValue}>{incident.description}</Text>
+
                 <Text style={styles.incidentsProperty}>VALOR:</Text>
                 <Text style={styles.incidentsValue}>{
                     Intl.NumberFormat(
